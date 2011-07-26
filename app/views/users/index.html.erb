@@ -1,0 +1,35 @@
+<h1>Listing users</h1>
+
+<%= currentUser = '' %>
+<table>
+  <tr>
+    <th>Username</th>
+    <th>Password</th>
+    <th>Type</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.UserName %></td>
+    <td><%= user.Password %></td>
+    <td><%= user.Type %></td>
+    <td><%= link_to 'Show', user %></td>
+    <td><%= link_to 'Edit', edit_user_path(user) %></td>
+    <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+  <% if session[:UserName] == session[user.UserName] %>
+  	<%= currentUser = user.UserName %>
+  <% end %>
+<% end %>
+</table>
+
+<br/>
+
+<%= link_to 'New User', new_user_path %>
+<br/>
+<%= link_to 'Task List', :controller => 'users', :action => 'tasklist', :user => currentUser %>
+<br/>
+<%= link_to 'End Session', login_path %>

@@ -1,0 +1,21 @@
+<h1>Login</h1>
+<% if @user.nil? == false %>
+	<%= @user.UserName %>
+	<% if session[:UserName] == session['admin'] %>
+		<p> admin in use </p>
+	<% else %>
+		<p> not admin </p>
+	<% end %>
+<% else %>
+	<p> Enter a valid Username or password </p>
+<% end %>
+<%= session[:UserName] = nil %>
+<%= form_tag :controller => 'users', :action => 'login' do %>
+	<%= label_tag 'UserName' %>
+	<%= text_field_tag :user, params[:user] %>
+	<br/>
+	<%= label_tag 'Password' %>
+	<%= password_field_tag :password, params[:password] %>
+	<br/>
+	<%= submit_tag 'Login' %>
+<% end %>

@@ -1,0 +1,25 @@
+<h1>Listing selected task</h1>
+
+<table>
+  <tr>
+    <th>Projectid</th>
+    <th>Username</th>
+    <th>Tasks</th>
+    <th>Deadline</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tasks.each do |task| %>
+  <tr>
+    <td><%= task.ProjectID %></td>
+    <td><%= task.UserName %></td>
+    <td><%= task.Tasks %></td>
+    <td><%= task.Deadline %></td>
+    <td><%= link_to 'Show', task %></td>
+    <td><%= link_to 'Edit', edit_task_path(task) %></td>
+    <td><%= link_to 'Destroy', task, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>

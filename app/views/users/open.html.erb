@@ -1,0 +1,18 @@
+<div id = "tab">
+<%= tabs %>
+<div id="projects">
+<h2><u> Projects </u></h2>
+<% @projectslist = openProjects %>
+<% if @projectslist.empty? %>
+	<p> No open projects to display </p>
+<% else %>
+	<p><b>Project ID - Title</b></p>
+	<% @projectslist.each do |project| %>
+		<p><%= link_to "#{project.ProjectID} - #{project.Title}", { :action => :tasksframe, :pid => "#{project.ProjectID}" }, { :target => "openframe" } %></p>
+	<% end %>
+<% end %>
+</div>
+<div id = "tasksframe">
+	<iframe src = "/users/tasksframe" name="openframe" id="openframe" frameborder="0" width="100%" height="80%" >
+</div>
+</div>

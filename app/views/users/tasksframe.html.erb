@@ -1,0 +1,29 @@
+<% @taskslist = tasksframe(params[:pid]) %>
+<% if @taskslist.empty? %>
+	<div id="left">
+	<h2><u> Project Tasks </u></h2>
+	<p> None!!! </p>
+	</div>
+	<div id="right">
+	<h2><u> Tasks assigned to you </u></h2>
+	<p> None!!! </p>
+	</div>
+<% else %>
+	<div id="left">
+	<h2><u> <%= getProjectName(params[:pid]) %> Tasks </u></h2>
+	<% taskarray = Array.new %>
+	<% i = 1 %>
+	<% @taskslist.each do |t| %>
+		<% if taskarray.include?(t.Tasks) == false %>
+			<% taskarray.push t.Tasks %>
+			<p><b><%= i %>. Task: </b><%= t.Tasks %>. <b>Users: </b><%= getTaskUsers(t.Tasks,params[:pid]) %>. <b>Deadline: </b><%= getDeadline(t.Tasks,params[:pid]) %> days left.<% if session[:UserName] == session['admin'] %> <%= link_to 'Edit Task', { :controller => :tasks, :action => :modifiedindex, :tid => "#{t.id}" } %><% end %></p>
+		<% i += 1 %>
+		<% end %>
+	<% end %>
+	</div>
+	<div id="right">
+	<h2><u> Tasks assigned to you </u></h2>
+	<% currentUser = getCurrentUser %>
+	<p><%= raw getUserTasks(currentUser,params[:pid]) %></p>
+	</div>
+<% end %>

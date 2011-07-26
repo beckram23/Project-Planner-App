@@ -1,0 +1,25 @@
+<div id = "tasklist">
+<h1>Tasklist</h1>
+<% if @user.nil? == false && session[@user] == session[:UserName] %>
+	<% if session[:UserName] == session['admin'] %>
+		<h2> Hello <%= @user %>!! </h2>
+		<br/>
+		<%= link_to 'Users Index', index_path %>
+		<br/>
+		<%= link_to 'Projects Index', projects_path %>
+		<br/>
+		<%= link_to 'Tasks Index', tasks_path %>
+	<% else %>
+		<h2> Hello <%= @user %>!! </h2>
+	<% end %>
+	<br/>
+	<%= link_to 'End Session', login_path %>
+	<br/>
+	</div>
+	<div id = "tab">
+		<iframe src="/users/tabsframe" frameborder="0" width="100%" height="80%" />
+	</div>
+<% else %>
+	<p> You are not logged in. Please login first. </p>
+	<%= link_to 'Login', login_path %>
+<% end %>

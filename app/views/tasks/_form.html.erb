@@ -1,0 +1,40 @@
+<%= form_for(@task) do |f| %>
+  <% if @task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+      <ul>
+      <% @task.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% @projects = openProjects %>
+  <% @users = User.find(:all) %>
+
+  <div class="field">
+    <%= f.label :ProjectID %><br />
+    <%= f.select :ProjectID, @projects.map {|p| [ p.Title, p.ProjectID]} %>
+  </div>
+  <div class="field">
+    <%= f.label :UserName %><br />
+    <%= f.select :UserName, @users.map {|u| [ u.UserName, u.UserName]} %>
+  </div>
+  <div class="field">
+    <%= f.label :Tasks %><br />
+    <%= f.text_area :Tasks %>
+  </div>
+  <div class="field">
+    <%= f.label :Deadline %><br />
+    <%= f.date_select :Deadline %>
+  </div>
+  <div class="field">
+    <%= f.label :Status %><br />
+    <%= f.select :Status, options_for_select ( %w( Pending Completed ) ) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

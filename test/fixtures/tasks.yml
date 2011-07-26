@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  ProjectID: MyString
+  UserName: MyString
+  Tasks: MyText
+  Deadline: 2011-07-06
+
+two:
+  ProjectID: MyString
+  UserName: MyString
+  Tasks: MyText
+  Deadline: 2011-07-06
